@@ -63,16 +63,44 @@ class Plugin {
 
 		$whitelist = [
 			'Googlebot', // Google.
+			'AdsBot-Google', // Google Ads.
+			'MediaPartners-Google', // Google AdSense.
+			'Applebot', // Apple.
+			'Yandex', // Yandex.
+			'Baiduspider', // Baidu.
 			'Bingbot',   // Bing.
 			'Slurp',     // Yahoo.
 			'DuckDuckBot', // DuckDuckGo.
 			'ia_archiver', // Archive.org.
+			'FacebookExternalHit', // Facebook.
+			'Twitterbot', // X.
+			'LinkedInBot', // LinkedIn.
 		];
 
 		$robots_txt = "User-agent: *\nDisallow: /\n";
 		foreach ( $whitelist as $crawler ) {
-			$robots_txt .= "User-agent: $crawler\nAllow: /\n";
+			$robots_txt .= "User-agent: $crawler\n";
 		}
+		$robots_txt .= "Allow: /\n";
+
+		$blocked_paths = [
+			'/wp-json/',
+			'/?rest_route=',
+			'/wp-admin/',
+			'/wp-content/cache/',
+			'/wp-content/plugins/',
+			'/xmlrpc.php',
+		];
+		foreach( $blocked_paths as $path ) {
+			$robots_txt .= "Disallow: $path\n";
+		}
+
+		$robots_txt .= "Disallow: /wp-includes/\n";
+		$robots_txt .= "Allow: /wp-includes/css/\n";
+		$robots_txt .= "Allow: /wp-includes/js/\n";
+
+		// Extra new line for readability.
+		$robots_txt .= "\n";
 
 		// Keep existing Sitemap references.
 		if ( strpos( $output, 'Sitemap: ' ) !== false ) {
