@@ -10,6 +10,27 @@ class Plugin {
 	const BACKUP_PATH = ABSPATH . 'robots.txt.eco-friendly-backup';
 
 	/**
+	 * The list of allowed crawlers.
+	 *
+	 * @var string[]
+	 */
+	public $allowed_spiders;
+
+	/**
+	 * The list of blocked paths.
+	 *
+	 * @var string[]
+	 */
+	public $blocked_paths;
+
+	/**
+	 * The list of allowed paths.
+	 *
+	 * @var string[]
+	 */
+	public $allowed_paths;
+
+	/**
 	 * Initialize the hooks and filters.
 	 */
 	public function init() {
@@ -60,6 +81,11 @@ class Plugin {
 			return "User-agent: *\nDisallow: /\n";
 		}
 
+		// We only need to do this when we're actually sending a robots.txt, hence here.
+		$this->allowed_spiders = $this->get_allowed_spiders();
+		$this->blocked_paths   = $this->get_blocked_paths();
+		$this->allowed_paths   = $this->get_allowed_paths();
+
 		$robots_txt  = "# This site is very specific about who it allows crawling from.\n";
 		$robots_txt .= "# Our default is to not allow crawling:\n";
 		$robots_txt .= "User-agent: *\n";
@@ -68,17 +94,16 @@ class Plugin {
 		$robots_txt .= "\n# Below are the crawlers that are allowed to crawl this site.\n";
 		$robots_txt .= "# Below that list, you'll find paths that are blocked, even for them,\n";
 		$robots_txt .= "# and then paths within those blocked paths that are allowed.\n";
-		foreach ( $this->get_allowed_spiders() as $crawler ) {
+		foreach ( $this->allowed_spiders as $crawler ) {
 			$robots_txt .= "User-agent: $crawler\n";
-		}
-		$robots_txt .= "Allow: /\n";
+			$robots_txt .= "Allow: /\n";
+			foreach ( $this->blocked_paths as $path ) {
+				$robots_txt .= "Disallow: $path\n";
+			}
 
-		foreach ( $this->get_blocked_paths() as $path ) {
-			$robots_txt .= "Disallow: $path\n";
-		}
-
-		foreach ( $this->get_allowed_paths() as $path ) {
-			$robots_txt .= "Allow: $path\n";
+			foreach ( $this->allowed_paths as $path ) {
+				$robots_txt .= "Allow: $path\n";
+			}
 		}
 
 		// Keep existing Sitemap references.

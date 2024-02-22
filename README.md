@@ -15,45 +15,7 @@ Optimizes your site's robots.txt to reduce server load and CO2 footprint by bloc
 
 ## Default output
 
-The default output of this plugin is as follows:
-
-```txt
-# This site is very specific about who it allows crawling from.
-# Our default is to not allow crawling:
-User-agent: *
-Disallow: /
-
-# Below are the crawlers that are allowed to crawl this site.
-# Below that list, you'll find paths that are blocked, even for them,
-# and then paths within those blocked paths that are allowed.
-User-agent: Applebot
-User-agent: ia_archiver
-User-agent: Baiduspider
-User-agent: Bingbot
-User-agent: DuckDuckBot
-User-agent: Googlebot
-User-agent: AdsBot-Google
-User-agent: MediaPartners-Google
-User-agent: Yandex
-User-agent: Slurp
-User-agent: FacebookExternalHit
-User-agent: LinkedInBot
-User-agent: WhatsApp
-User-agent: Twitterbot
-Allow: /
-Disallow: /wp-json/
-Disallow: /?rest_route=
-Disallow: /wp-admin/
-Disallow: /wp-content/cache/
-Disallow: /wp-content/plugins/
-Disallow: /xmlrpc.php
-Disallow: /wp-includes/
-Allow: /wp-includes/css/
-Allow: /wp-includes/js/
-
-# XML Sitemap:
-Sitemap: https://example.com/sitemap_index.xml
-```
+The default output of this plugin [can be seen here on joost.blog](https://joost.blog/robots.txt) or [here on emilia.capital](https://emilia.capital/robots.txt).
 
 ## Filters
 
