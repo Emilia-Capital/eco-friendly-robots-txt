@@ -59,7 +59,5 @@ Allow: /xmlrpc.php
 Allow: /wp-includes/
 
 # XML Sitemap:
-
-# XML Sitemap:
 Sitemap: https://example.com/sitemap_index.xml
 ```
