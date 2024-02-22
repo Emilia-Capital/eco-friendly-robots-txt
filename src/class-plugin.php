@@ -80,7 +80,8 @@ class Plugin {
 			'Twitterbot', // X.
 			'LinkedInBot', // LinkedIn.
 		];
-		$robots_txt .= "# Crawlers that are allowed to crawl this site:\n";
+		$robots_txt .= "\n# Below are the crawlers that are allowed to crawl this site.\n";
+		$robots_txt .= "# Below that list, you'll find paths that are blocked, even for them, and then paths within those blocked paths that are allowed.\n";
 		foreach ( $allowlist as $crawler ) {
 			$robots_txt .= "User-agent: $crawler\n";
 		}
@@ -94,7 +95,6 @@ class Plugin {
 			'/xmlrpc.php',
 			'/wp-includes/',
 		];
-		$robots_txt .= "# Paths that are blocked even for allowed crawlers:\n";
 		foreach( $blocked_paths as $path ) {
 			$robots_txt .= "Disallow: $path\n";
 		}
@@ -103,19 +103,15 @@ class Plugin {
 			'/wp-includes/css/',
 			'/wp-includes/js/',
 		];
-		$robots_txt .= "# Paths within the blocked paths that are allowed:\n";
 		foreach( $allowed_paths as $path ) {
 			$robots_txt .= "Allow: $path\n";
 		}
-
-		// Extra new line for readability.
-		$robots_txt .= "\n";
 
 		// Keep existing Sitemap references.
 		if ( strpos( $output, 'Sitemap: ' ) !== false ) {
 			preg_match_all( '/Sitemap: (.+)/', $output, $matches );
 			foreach ( $matches[0] as $sitemap ) {
-				$robots_txt .= "# XML Sitemap:\n";
+				$robots_txt .= "\n# XML Sitemap:\n";
 				$robots_txt .= "$sitemap\n";
 			}
 		}
