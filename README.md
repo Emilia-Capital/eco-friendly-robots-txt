@@ -13,14 +13,7 @@ Optimizes your site's robots.txt to reduce server load and CO2 footprint by bloc
 > [!WARNING]  
 > The plugin _will_ delete your existing `robots.txt` file, if one exists on your server, although it'll try to back it up. It'll restore it, when it can, when you uninstall the plugin.
 
-## Development
-
-If you're developing on this plugin, you will probably want to run tests and lint. You can do that by running the following commands:
-
-* PHP Code style: `composer check-cs`
-* PHP Autofixer for code style: `composer fix-cs`
-* PHP Lint: `composer lint`
-* PHP Unit tests: `composer test`
+## Default output
 
 The default output of this plugin is as follows:
 
@@ -61,3 +54,21 @@ Allow: /wp-includes/js/
 # XML Sitemap:
 Sitemap: https://example.com/sitemap_index.xml
 ```
+
+## Filters
+
+The plugin exposes the following filters:
+
+* `emilia/ecofriendly_robots/allowed_spiders` - filter an `array` of user agents.
+* `emilia/ecofriendly_robots/blocked_paths` - filters an `array` of blocked paths.
+* `emilia/ecofriendly_robots/allowed_paths` - filters an `array` of allowed paths, should be subsets of `blocked_paths`.
+* `emilia/ecofriendly_robots/output` - filters the entire output as a `string`.
+
+## Development
+
+If you're developing on this plugin, you will probably want to run tests and lint. You can do that by running the following commands:
+
+* PHP Code style: `composer check-cs`
+* PHP Autofixer for code style: `composer fix-cs`
+* PHP Lint: `composer lint`
+* PHP Unit tests: `composer test`
