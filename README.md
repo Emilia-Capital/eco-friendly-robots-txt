@@ -14,3 +14,39 @@ If you're developing on this plugin, you will probably want to run tests and lin
 * PHP Autofixer for code style: `composer fix-cs`
 * PHP Lint: `composer lint`
 * PHP Unit tests: `composer test`
+
+The default output of this plugin is as follows:
+
+```txt
+# This site is very specific about who it allows crawling from. Our default is you're not allowed to crawl:
+User-agent: *
+Disallow: /
+
+# Below are the crawlers that are allowed to crawl this site.
+# Below that list, you'll find paths that are blocked, even for them, and then paths within those blocked paths that are allowed.
+User-agent: Googlebot
+User-agent: AdsBot-Google
+User-agent: MediaPartners-Google
+User-agent: Applebot
+User-agent: Yandex
+User-agent: Baiduspider
+User-agent: Bingbot
+User-agent: Slurp
+User-agent: DuckDuckBot
+User-agent: ia_archiver
+User-agent: FacebookExternalHit
+User-agent: Twitterbot
+User-agent: LinkedInBot
+Disallow: /wp-json/
+Disallow: /?rest_route=
+Disallow: /wp-admin/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/plugins/
+Disallow: /xmlrpc.php
+Disallow: /wp-includes/
+Allow: /wp-includes/css/
+Allow: /wp-includes/js/
+
+# XML Sitemap:
+Sitemap: https://example.com/sitemap_index.xml
+```
