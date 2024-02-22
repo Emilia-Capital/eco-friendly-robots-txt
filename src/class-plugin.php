@@ -27,7 +27,6 @@ class Plugin {
 			// phpcs:ignore Generic.Commenting.Todo.TaskFound
 			// @todo Ask for user consent before proceeding.
 			// This step will need to be handled via admin notice or a settings page.
-			// For the sake of this example, we'll assume consent is given.
 
 			$wp_filesystem = $this->get_filesystem();
 			$wp_filesystem::move( $robots_path, self::BACKUP_PATH );
@@ -61,49 +60,22 @@ class Plugin {
 			return "User-agent: *\nDisallow: /\n";
 		}
 
-		$robots_txt = "# This site is very specific about who it allows crawling from. Our default is you're not allowed to crawl:\n";
+		$robots_txt  = "# This site is very specific about who it allows crawling from. Our default is you're not allowed to crawl:\n";
 		$robots_txt .= "User-agent: *\n";
 		$robots_txt .= "Disallow: /\n";
 
-		$allowlist = [
-			'Googlebot', // Google.
-			'AdsBot-Google', // Google Ads.
-			'MediaPartners-Google', // Google AdSense.
-			'Applebot', // Apple.
-			'Yandex', // Yandex.
-			'Baiduspider', // Baidu.
-			'Bingbot',   // Bing.
-			'Slurp',     // Yahoo.
-			'DuckDuckBot', // DuckDuckGo.
-			'ia_archiver', // Archive.org.
-			'FacebookExternalHit', // Facebook.
-			'Twitterbot', // X.
-			'LinkedInBot', // LinkedIn.
-		];
 		$robots_txt .= "\n# Below are the crawlers that are allowed to crawl this site.\n";
 		$robots_txt .= "# Below that list, you'll find paths that are blocked, even for them, and then paths within those blocked paths that are allowed.\n";
-		foreach ( $allowlist as $crawler ) {
+		foreach ( $this->get_allowed_spiders() as $crawler ) {
 			$robots_txt .= "User-agent: $crawler\n";
 		}
+		$robots_txt .= "Allow: /\n";
 
-		$blocked_paths = [
-			'/wp-json/',
-			'/?rest_route=',
-			'/wp-admin/',
-			'/wp-content/cache/',
-			'/wp-content/plugins/',
-			'/xmlrpc.php',
-			'/wp-includes/',
-		];
-		foreach( $blocked_paths as $path ) {
+		foreach ( $this->get_blocked_paths() as $path ) {
 			$robots_txt .= "Disallow: $path\n";
 		}
 
-		$allowed_paths = [
-			'/wp-includes/css/',
-			'/wp-includes/js/',
-		];
-		foreach( $allowed_paths as $path ) {
+		foreach ( $this->get_allowed_paths() as $path ) {
 			$robots_txt .= "Allow: $path\n";
 		}
 
@@ -116,7 +88,89 @@ class Plugin {
 			}
 		}
 
-		return $robots_txt;
+		/**
+		 * Filters the output of the robots.txt file.
+		 *
+		 * @param string $allowed_spiders The list of allowed crawlers.
+		 */
+		return apply_filters( 'emilia/ecofriendly_robots/output', $robots_txt );
+	}
+
+	/**
+	 * Retrieves the list of allowed crawlers.
+	 *
+	 * @return array
+	 */
+	private function get_allowed_spiders() {
+		/**
+		 * Filters the list of allowed crawlers.
+		 *
+		 * @param array $allowed_spiders The list of allowed crawlers.
+		 */
+		return apply_filters(
+			'emilia/ecofriendly_robots/allowed_spiders',
+			[
+				'Applebot',             // Apple.
+				'ia_archiver',          // Archive.org.
+				'Baiduspider',          // Baidu.
+				'Bingbot',              // Bing.
+				'DuckDuckBot',          // DuckDuckGo.
+				'Googlebot',            // Google.
+				'AdsBot-Google',        // Google Ads.
+				'MediaPartners-Google', // Google AdSense.
+				'Yandex',               // Yandex.
+				'Slurp',                // Yahoo.
+				'FacebookExternalHit',  // Facebook.
+				'LinkedInBot',          // LinkedIn.
+				'WhatsApp',             // WhatsApp.
+				'Twitterbot',           // X.
+			]
+		);
+	}
+
+	/**
+	 * Retrieves the list of blocked paths.
+	 *
+	 * @return array
+	 */
+	private function get_blocked_paths() {
+		/**
+		 * Filters the list of blocked paths.
+		 *
+		 * @param array $blocked_paths The list of blocked paths.
+		 */
+		return apply_filters(
+			'emilia/ecofriendly_robots/blocked_paths',
+			[
+				'/wp-includes/css/',
+				'/wp-includes/js/',
+			]
+		);
+	}
+
+	/**
+	 * Retrieves the list of allowed paths.
+	 *
+	 * @return array
+	 */
+	private function get_allowed_paths() {
+		/**
+		 * Filters the list of allowed paths.
+		 *
+		 * @param array $allowed_paths The list of allowed paths.
+		 */
+		return apply_filters(
+			'emilia/ecofriendly_robots/allowed_paths',
+			[
+				'/wp-json/',
+				'/?rest_route=',
+				'/wp-admin/',
+				'/wp-content/cache/',
+				'/wp-content/plugins/',
+				'/xmlrpc.php',
+				'/wp-includes/',
+			]
+		);
 	}
 
 	/**
