@@ -48,15 +48,15 @@ User-agent: LinkedInBot
 User-agent: WhatsApp
 User-agent: Twitterbot
 Allow: /
-Disallow: /wp-includes/css/
-Disallow: /wp-includes/js/
-Allow: /wp-json/
-Allow: /?rest_route=
-Allow: /wp-admin/
-Allow: /wp-content/cache/
-Allow: /wp-content/plugins/
-Allow: /xmlrpc.php
-Allow: /wp-includes/
+Disallow: /wp-json/
+Disallow: /?rest_route=
+Disallow: /wp-admin/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/plugins/
+Disallow: /xmlrpc.php
+Disallow: /wp-includes/
+Allow: /wp-includes/css/
+Allow: /wp-includes/js/
 
 # XML Sitemap:
 Sitemap: https://example.com/sitemap_index.xml
