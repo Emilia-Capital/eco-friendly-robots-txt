@@ -4,7 +4,7 @@
 # Eco-Friendly Robots.txt
 Optimizes your site's robots.txt to reduce server load and CO2 footprint by blocking unnecessary crawlers while allowing major search engines and specific tools.
 
-[Test this plugin on the WordPress playground](https://playground.wordpress.net/#%7B%22landingPage%22:%22/wp-admin/edit-tags.php?taxonomy=post_tag%22,%22features%22:%7B%22networking%22:true%7D,%22steps%22:%5B%7B%22step%22:%22defineWpConfigConsts%22,%22consts%22:%7B%22IS_PLAYGROUND_PREVIEW%22:true%7D%7D,%7B%22step%22:%22login%22,%22username%22:%22admin%22,%22password%22:%22password%22%7D,%7B%22step%22:%22installPlugin%22,%22pluginZipFile%22:%7B%22resource%22:%22url%22,%22url%22:%22https://bypass-cors.altha.workers.dev/https://github.com/Emilia-Capital/eco-friendly-robots-txt/archive/refs/heads/main.zip%22%7D,%22options%22:%7B%22activate%22:true%7D%7D%5D%7D)
+[Test this plugin on the WordPress playground](https://playground.wordpress.net/#%7B%22landingPage%22:%22/?robots=1%22,%22features%22:%7B%22networking%22:true%7D,%22steps%22:%5B%7B%22step%22:%22defineWpConfigConsts%22,%22consts%22:%7B%22IS_PLAYGROUND_PREVIEW%22:true%7D%7D,%7B%22step%22:%22login%22,%22username%22:%22admin%22,%22password%22:%22password%22%7D,%7B%22step%22:%22installPlugin%22,%22pluginZipFile%22:%7B%22resource%22:%22url%22,%22url%22:%22https://bypass-cors.altha.workers.dev/https://github.com/Emilia-Capital/eco-friendly-robots-txt/archive/refs/heads/main.zip%22%7D,%22options%22:%7B%22activate%22:true%7D%7D%5D%7D)
 
 ## Development
 
