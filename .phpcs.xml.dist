@@ -63,21 +63,11 @@
 	<rule ref="Generic.Commenting.Todo"/>
 
 	<!-- Check for PHP cross-version compatibility. -->
-	<!--
-	To enable this, the PHPCompatibilityWP standard needs
-	to be installed.
-	See the readme for installation instructions:
-	https://github.com/PHPCompatibility/PHPCompatibilityWP
-	For more information, also see:
-	https://github.com/PHPCompatibility/PHPCompatibility
-	-->
-	<!--
-	<config name="testVersion" value="5.6-"/>
+	<config name="testVersion" value="7.4-"/>
 	<rule ref="PHPCompatibilityWP">
 		<include-pattern>*\.php</include-pattern>
 	</rule>
-	-->
-
+	
 
 	<!--
 	#############################################################################
@@ -94,7 +84,7 @@
 	the wiki:
 	https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
 	-->
-	<config name="minimum_wp_version" value="6.0"/>
+	<config name="minimum_wp_version" value="6.2"/>
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
@@ -117,6 +107,8 @@
 	    <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
     	<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
 		<exclude name="WordPress.PHP.YodaConditions"/>
+		<!-- We should be allowed to have / in hook names. -->
+		<exclude name="WordPress.NamingConventions.ValidHookName.UseUnderscores"/>
 	</rule>
 
 	<!-- Enforce short arrays: -->
