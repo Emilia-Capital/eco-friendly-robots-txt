@@ -61,7 +61,11 @@ class Plugin {
 			return "User-agent: *\nDisallow: /\n";
 		}
 
-		$whitelist = [
+		$robots_txt = "# This site is very specific about who it allows crawling from. Our default is you're not allowed to crawl:\n";
+		$robots_txt .= "User-agent: *\n";
+		$robots_txt .= "Disallow: /\n";
+
+		$allowlist = [
 			'Googlebot', // Google.
 			'AdsBot-Google', // Google Ads.
 			'MediaPartners-Google', // Google AdSense.
@@ -76,12 +80,10 @@ class Plugin {
 			'Twitterbot', // X.
 			'LinkedInBot', // LinkedIn.
 		];
-
-		$robots_txt = "User-agent: *\nDisallow: /\n";
-		foreach ( $whitelist as $crawler ) {
+		$robots_txt .= "# Crawlers that are allowed to crawl this site:\n";
+		foreach ( $allowlist as $crawler ) {
 			$robots_txt .= "User-agent: $crawler\n";
 		}
-		$robots_txt .= "Allow: /\n";
 
 		$blocked_paths = [
 			'/wp-json/',
@@ -90,14 +92,21 @@ class Plugin {
 			'/wp-content/cache/',
 			'/wp-content/plugins/',
 			'/xmlrpc.php',
+			'/wp-includes/',
 		];
+		$robots_txt .= "# Paths that are blocked even for allowed crawlers:\n";
 		foreach( $blocked_paths as $path ) {
 			$robots_txt .= "Disallow: $path\n";
 		}
 
-		$robots_txt .= "Disallow: /wp-includes/\n";
-		$robots_txt .= "Allow: /wp-includes/css/\n";
-		$robots_txt .= "Allow: /wp-includes/js/\n";
+		$allowed_paths = [
+			'/wp-includes/css/',
+			'/wp-includes/js/',
+		];
+		$robots_txt .= "# Paths within the blocked paths that are allowed:\n";
+		foreach( $allowed_paths as $path ) {
+			$robots_txt .= "Allow: $path\n";
+		}
 
 		// Extra new line for readability.
 		$robots_txt .= "\n";
@@ -106,6 +115,7 @@ class Plugin {
 		if ( strpos( $output, 'Sitemap: ' ) !== false ) {
 			preg_match_all( '/Sitemap: (.+)/', $output, $matches );
 			foreach ( $matches[0] as $sitemap ) {
+				$robots_txt .= "# XML Sitemap:\n";
 				$robots_txt .= "$sitemap\n";
 			}
 		}
