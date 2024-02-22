@@ -60,12 +60,14 @@ class Plugin {
 			return "User-agent: *\nDisallow: /\n";
 		}
 
-		$robots_txt  = "# This site is very specific about who it allows crawling from. Our default is you're not allowed to crawl:\n";
+		$robots_txt  = "# This site is very specific about who it allows crawling from.\n";
+		$robots_txt .= "# Our default is to not allow crawling:\n";
 		$robots_txt .= "User-agent: *\n";
 		$robots_txt .= "Disallow: /\n";
 
 		$robots_txt .= "\n# Below are the crawlers that are allowed to crawl this site.\n";
-		$robots_txt .= "# Below that list, you'll find paths that are blocked, even for them, and then paths within those blocked paths that are allowed.\n";
+		$robots_txt .= "# Below that list, you'll find paths that are blocked, even for them,\n";
+		$robots_txt .= "# and then paths within those blocked paths that are allowed.\n";
 		foreach ( $this->get_allowed_spiders() as $crawler ) {
 			$robots_txt .= "User-agent: $crawler\n";
 		}

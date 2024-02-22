@@ -25,7 +25,7 @@ If you're developing on this plugin, you will probably want to run tests and lin
 The default output of this plugin is as follows:
 
 ```txt
-# This site is very specific about who it allows crawling from. Our default is you're not allowed to crawl:
+# This site is very specific about who it allows crawling from. Our default is to not allow crawling:
 User-agent: *
 Disallow: /
 
