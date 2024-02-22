@@ -1,0 +1,36 @@
+{
+	"name": "emilia/eco-friendly-robots-txt",
+	"description": "Optimizes your site's robots.txt to reduce server load and CO2 footprint by blocking unnecessary crawlers while allowing major search engines and specific tools.",
+	"homepage": "https://joost.blog/plugins/eco-friendly-robots-txt/",
+	"type": "wordpress-plugin",
+	"license": "GPL-3.0-or-later",
+	"require": {
+		"php": ">=7.4"
+	},
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+		"php-parallel-lint/php-parallel-lint": "^1.3",
+		"phpunit/phpunit": "^7.0",
+		"yoast/wp-test-utils": "^1.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+	"scripts": {
+		"check-cs": [
+			"@php ./vendor/bin/phpcs -s"
+		],
+		"fix-cs": [
+			"@php ./vendor/bin/phpcbf"
+		],
+		"lint": [
+			"@php ./vendor/php-parallel-lint/php-parallel-lint/parallel-lint . -e php --show-deprecated --exclude vendor --exclude node_modules --exclude .git"
+		],
+		"test": [
+			"@php ./vendor/phpunit/phpunit/phpunit"
+		]
+	}
+}
