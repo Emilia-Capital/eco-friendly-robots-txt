@@ -11,8 +11,6 @@
  * @package Emilia\EcoFriendlyRobotsTxt
  */
 
-namespace Emilia\EcoFriendlyRobotsTxt;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct script access disallowed.' );
 }
@@ -25,7 +23,7 @@ require_once plugin_dir_path( __FILE__ ) . 'src/class-plugin.php';
  * @return void
  */
 function ecofriendly_robotstxt_init() {
-	$eco_friendly_robots = new Plugin();
+	$eco_friendly_robots = new Emilia\EcoFriendlyRobotsTxt\Plugin();
 	$eco_friendly_robots->init();
 }
 
