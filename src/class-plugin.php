@@ -135,7 +135,7 @@ class Plugin {
 	 *
 	 * @return array
 	 */
-	private function get_blocked_paths() {
+	private function get_allowed_paths() {
 		/**
 		 * Filters the list of blocked paths.
 		 *
@@ -155,7 +155,7 @@ class Plugin {
 	 *
 	 * @return array
 	 */
-	private function get_allowed_paths() {
+	private function get_blocked_paths() {
 		/**
 		 * Filters the list of allowed paths.
 		 *
