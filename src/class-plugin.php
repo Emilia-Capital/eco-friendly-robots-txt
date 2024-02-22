@@ -13,7 +13,7 @@ class Plugin {
 	 * Initialize the hooks and filters.
 	 */
 	public function init() {
-		add_filter( 'robots_txt', [ $this, 'modify_robots_txt' ], 10, 2 );
+		add_filter( 'robots_txt', [ $this, 'modify_robots_txt' ], 100000, 2 ); // Priority 100000 to ensure it runs after Yoast SEO.
 		register_activation_hook( __FILE__, [ $this, 'backup_static_robots_txt' ] );
 		register_deactivation_hook( __FILE__, [ $this, 'restore_static_robots_txt' ] );
 	}
