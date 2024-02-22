@@ -14,10 +14,3 @@ If you're developing on this plugin, you will probably want to run tests and lin
 * PHP Autofixer for code style: `composer fix-cs`
 * PHP Lint: `composer lint`
 * PHP Unit tests: `composer test`
-
-## Releasing an update
-
-When releasing an update, the following steps should be done:
-1. Update the `Version: ` header in the main plugin file.
-2. [Create a new release on GitHub](https://github.com/Emilia-Capital/fewer-tags-pro/releases/new) with the same version number as the `Version: ` header.
-3. [Edit the download](https://fewertags.com/wp-admin/post.php?post=3330&action=edit) on fewertags.com, and in the *Download Files* section, select the version tag from the dropdown.
