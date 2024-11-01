@@ -2,6 +2,7 @@
 /**
  * Plugin Name: Eco-Friendly Robots.txt
  * Plugin URI: https://joost.blog/plugins/eco-friendly-robots-txt/
+ * GitHub Plugin URI: Emilia-Capital/eco-friendly-robots-txt
  * Description: Optimizes your site's robots.txt to reduce server load and CO2 footprint by blocking unnecessary crawlers while allowing major search engines and specific tools.
  * Version: 0.5
  * Author: Joost de Valk

@@ -91,10 +91,11 @@ class Plugin {
 		$robots_txt .= "User-agent: *\n";
 		$robots_txt .= "Disallow: /\n";
 
-		$robots_txt .= "\n# Below are the crawlers that are allowed to crawl this site.\n";
+		$robots_txt .= "\n# Below are the crawlers that _are_ allowed to crawl this site.\n";
 		$robots_txt .= "# Below that list, you'll find paths that are blocked, even for them,\n";
 		$robots_txt .= "# and then paths within those blocked paths that are allowed.\n";
-		foreach ( $this->allowed_spiders as $crawler ) {
+		foreach ( $this->allowed_spiders as $crawler => $description ) {
+			$robots_txt .= "# $description\n";
 			$robots_txt .= "User-agent: $crawler\n";
 			$robots_txt .= "Allow: /\n";
 			foreach ( $this->blocked_paths as $path ) {
@@ -137,20 +138,23 @@ class Plugin {
 		return apply_filters(
 			'emilia/ecofriendly_robots/allowed_spiders',
 			[
-				'Applebot',             // Apple.
-				'ia_archiver',          // Archive.org.
-				'Baiduspider',          // Baidu.
-				'Bingbot',              // Bing.
-				'DuckDuckBot',          // DuckDuckGo.
-				'Googlebot',            // Google.
-				'AdsBot-Google',        // Google Ads.
-				'MediaPartners-Google', // Google AdSense.
-				'Yandex',               // Yandex.
-				'Slurp',                // Yahoo.
-				'FacebookExternalHit',  // Facebook.
-				'LinkedInBot',          // LinkedIn.
-				'WhatsApp',             // WhatsApp.
-				'Twitterbot',           // X.
+				'AdsBot-Google'        => 'Google Ads',
+				'Applebot'             => 'Apple',
+				'Baiduspider'          => 'Baidu',
+				'Bingbot'              => 'Bing',
+				'ChatGPT-User'         => 'ChatGPT user requests',
+				'DuckDuckBot'          => 'DuckDuckGo',
+				'FacebookExternalHit'  => 'Facebook',
+				'GPTBot'               => 'OpenAI models',
+				'Googlebot'            => 'Google',
+				'LinkedInBot'          => 'LinkedIn',
+				'MediaPartners-Google' => 'Google AdSense',
+				'OAI-SearchBot'        => 'OpenAI Search',
+				'Slurp'                => 'Yahoo',
+				'Twitterbot'           => 'X',
+				'WhatsApp'             => 'WhatsApp',
+				'Yandex'               => 'Yandex',
+				'ia_archiver'          => 'Archive.org',
 			]
 		);
 	}
